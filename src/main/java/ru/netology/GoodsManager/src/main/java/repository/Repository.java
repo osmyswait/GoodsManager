@@ -1,5 +1,6 @@
 package ru.netology.GoodsManager.src.main.java.repository;
 
+import ru.netology.GoodsManager.src.main.java.exception.NotFoundException;
 import ru.netology.GoodsManager.src.main.java.product.Product;
 
 public class Repository {
@@ -14,11 +15,16 @@ public class Repository {
         products = tmp;
     }
 
-    public void removeById(int id) {
+    public void removeById(int idRemove) {
+        if(findById(idRemove) == null) {
+            throw new NotFoundException(idRemove);
+        }
+
+
         Product[] tmp = new Product[products.length - 1];
         int indexToCopy = 0;
         for (Product product : products) {
-            if (product.getId() != id) {
+            if (product.getId() != idRemove) {
                 tmp[indexToCopy] = product;
                 indexToCopy++;
             }
@@ -27,5 +33,14 @@ public class Repository {
     }
     public Product[] findAll() {
         return products;
+    }
+
+    public Product findById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 }

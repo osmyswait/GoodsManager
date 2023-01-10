@@ -6,8 +6,8 @@ import ru.netology.GoodsManager.src.main.java.repository.Repository;
 public class Manager {
     private Repository repository;
 
-    public Manager(Repository repo) {
-        this.repository = repo;
+    public Manager(Repository repository) {
+        this.repository = repository;
     }
 
     public void add(Product product) {
